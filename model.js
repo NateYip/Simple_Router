@@ -17,20 +17,25 @@ RouterModel.prototype ={
 
 function ViewUpdate(item){
     if(!item){
-        alert('error');
+    	//路由配置有问题，component 属性没有值
+        alert('error router config');
         return ;
     }
-    //找到相应的component去更新router-view 
+    //找到相应的 component 去更新 router-view 
+    //先获取所有的 router-view 视图
     let routeEl = document.querySelectorAll("#router-view");
-    if(typeof item === 'string'){
+   	//看第一个路由规则，它的 component 没有指定具体的 router-view 像这样的就更新在 default 里
+   	if(typeof item === 'string'){
         routeEl.forEach((e)=>{
             if(e.getAttribute('name') === 'default'){
                 console.log('Update String');
-                e.innerHTML = item
+                //将 router-view 内容更新为 当前的 component 
+                e.innerHTML = item;
                 return ;
             }
         })
     }
+    //其他有具体配置的，传过来的是一个对象，具体路径具体配置，和上面差不多
     for(let key in item ){
         routeEl.forEach((e)=>{
             if(e.getAttribute('name') === key){

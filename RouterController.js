@@ -12,7 +12,7 @@ RouterController.prototype = {
             return item.path === '*';
         })
         console.log(defaultIndex)
-        if(!defaultIndex){
+        if(defaultIndex){
             window.location.hash = allView[defaultIndex].redirect
         }
         window.addEventListener('hashchange', () => {
